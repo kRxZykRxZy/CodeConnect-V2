@@ -19,40 +19,35 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Get next semantic version tag
-        id: version
         run: |
           set -e
 
           REPO="codeconnect/codeconnect"
+          DEFAULT_TAG="v0.0.1"
 
-          # Fetch latest tag from Docker Hub
-          LATEST_TAG=$(curl -s \
-            "https://hub.docker.com/v2/repositories/${REPO}/tags?page_size=1&ordering=last_updated" \
-            | jq -r '.results[0].name')
+          echo "Fetching latest Docker Hub tag..."
 
-          echo "Latest tag: $LATEST_TAG"
+          RESPONSE=$(curl -s \
+            "https://hub.docker.com/v2/repositories/${REPO}/tags?page_size=1&ordering=last_updated")
 
-          # Strip leading 'v'
-          VERSION=${LATEST_TAG#v}
+          LATEST_TAG=$(echo "$RESPONSE" | jq -r '.results[0].name // empty')
 
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No existing tags found. Using default: $DEFAULT_TAG"
+            NEXT_TAG="$DEFAULT_TAG"
+          else
+            echo "Latest tag: $LATEST_TAG"
 
-          PATCH=$((PATCH + 1))
+            VERSION=${LATEST_TAG#v}
+            IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 
-          if [ "$PATCH" -ge 10 ]; then
-            PATCH=0
-            MINOR=$((MINOR + 1))
+            PATCH=$((PATCH + 1))
+
+            NEXT_TAG="v${MAJOR}.${MINOR}.${PATCH}"
           fi
 
-          if [ "$MINOR" -ge 100 ]; then
-            MINOR=0
-            MAJOR=$((MAJOR + 1))
-          fi
-
-          NEXT_TAG="v${MAJOR}.${MINOR}.${PATCH}"
           echo "Next tag: $NEXT_TAG"
-
-          echo "NEXT_TAG=$NEXT_TAG" >> $GITHUB_ENV
+          echo "NEXT_TAG=$NEXT_TAG" >> "$GITHUB_ENV"
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
