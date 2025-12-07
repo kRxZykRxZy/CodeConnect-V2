@@ -1,51 +1,54 @@
 {{template "base/head" .}}
-<div role="main" aria-label="{{if .IsSigned}}{{ctx.Locale.Tr "dashboard"}}{{else}}{{ctx.Locale.Tr "home"}}{{end}}" class="page-content home">
-	<div class="tw-mb-8 tw-px-8">
-		<div class="center">
-			<img class="logo" width="220" height="220" src="{{AssetUrlPrefix}}/img/logo.svg" alt="{{ctx.Locale.Tr "logo"}}">
-			<div class="hero">
-				<h1 class="ui icon header title tw-text-balance">
-					{{AppName}}
-				</h1>
-				<h2 class="tw-text-balance">{{ctx.Locale.Tr "startpage.app_desc"}}</h2>
-			</div>
-		</div>
-	</div>
-	<div class="ui stackable middle very relaxed page grid">
-		<div class="eight wide center column">
-			<h1 class="hero ui icon header">
-				{{svg "octicon-flame"}} {{ctx.Locale.Tr "startpage.install"}}
-			</h1>
-			<p class="large tw-text-balance">
-				{{ctx.Locale.Tr "startpage.install_desc" "https://docs.gitea.com/installation/install-from-binary" "https://github.com/go-gitea/gitea/tree/master/docker" "https://docs.gitea.com/installation/install-from-package"}}
-			</p>
-		</div>
-		<div class="eight wide center column">
-			<h1 class="hero ui icon header">
-				{{svg "octicon-device-desktop"}} {{ctx.Locale.Tr "startpage.platform"}}
-			</h1>
-			<p class="large tw-text-balance">
-				{{ctx.Locale.Tr "startpage.platform_desc" "https://go.dev/"}}
-			</p>
-		</div>
-	</div>
-	<div class="ui stackable middle very relaxed page grid">
-		<div class="eight wide center column">
-			<h1 class="hero ui icon header">
-				{{svg "octicon-rocket"}} {{ctx.Locale.Tr "startpage.lightweight"}}
-			</h1>
-			<p class="large tw-text-balance">
-				{{ctx.Locale.Tr "startpage.lightweight_desc"}}
-			</p>
-		</div>
-		<div class="eight wide center column">
-			<h1 class="hero ui icon header">
-				{{svg "octicon-code"}} {{ctx.Locale.Tr "startpage.license"}}
-			</h1>
-			<p class="large tw-text-balance">
-				{{ctx.Locale.Tr "startpage.license_desc" "https://code.gitea.io/gitea" "code.gitea.io/gitea" "https://github.com/go-gitea/gitea"}}
-			</p>
-		</div>
-	</div>
+<div role="main" aria-label="{{if .IsSigned}}Dashboard{{else}}Home{{end}}" class="page-content home" style="background-color:#f5faff; color:#1a1a1a;">
+    <div class="tw-mb-8 tw-px-8">
+        <div class="center">
+            <img class="logo" width="220" height="220" src="{{AssetUrlPrefix}}/img/logo.svg" alt="CodeConnect Logo">
+            <div class="hero" style="color:#007bff;">
+                <h1 class="ui icon header title tw-text-balance">
+                    CodeConnect
+                </h1>
+                <h2 class="tw-text-balance">Connect, share, and collaborate on code seamlessly.</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="ui stackable middle very relaxed page grid">
+        <div class="eight wide center column">
+            <h1 class="hero ui icon header" style="color:#007bff;">
+                {{svg "octicon-flame"}} Fast Setup
+            </h1>
+            <p class="large tw-text-balance">
+                Easily get started with CodeConnect. <a href="https://docs.gitea.com/installation/install-from-binary" style="color:#007bff;">Install from binary</a>, <a href="https://github.com/go-gitea/gitea/tree/master/docker" style="color:#007bff;">Docker</a>, or <a href="https://docs.gitea.com/installation/install-from-package" style="color:#007bff;">package managers</a>.
+            </p>
+        </div>
+        <div class="eight wide center column">
+            <h1 class="hero ui icon header" style="color:#007bff;">
+                {{svg "octicon-device-desktop"}} Cross-Platform
+            </h1>
+            <p class="large tw-text-balance">
+                Works on any device, everywhere. <a href="https://go.dev/" style="color:#007bff;">Powered by Go</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="ui stackable middle very relaxed page grid">
+        <div class="eight wide center column">
+            <h1 class="hero ui icon header" style="color:#007bff;">
+                {{svg "octicon-rocket"}} Lightweight
+            </h1>
+            <p class="large tw-text-balance">
+                CodeConnect is fast, lightweight, and efficient—perfect for any team or individual.
+            </p>
+        </div>
+        <div class="eight wide center column">
+            <h1 class="hero ui icon header" style="color:#007bff;">
+                {{svg "octicon-code"}} Open Source
+            </h1>
+            <p class="large tw-text-balance">
+                Fully open-source. <a href="https://code.gitea.io/gitea" style="color:#007bff;">Learn more</a> or contribute on <a href="https://github.com/go-gitea/gitea" style="color:#007bff;">GitHub</a>.
+            </p>
+        </div>
+    </div>
 </div>
 {{template "base/footer" .}}
