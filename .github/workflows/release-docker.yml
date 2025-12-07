@@ -57,8 +57,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t codeconnect/codeconnect:${NEXT_TAG} .
+          docker build -t codeconnect/codeconnect:${NEXT_TAG} -t codeconnect/codeconnect:latest .
 
-      - name: Push Docker image
+      - name: Push Docker images
         run: |
           docker push codeconnect/codeconnect:${NEXT_TAG}
+          docker push codeconnect/codeconnect:latest
